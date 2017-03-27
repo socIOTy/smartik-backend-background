@@ -68,7 +68,7 @@ public class SmartLedDeviceSimulator implements DeviceSimulator<Action> {
 				device.setState(false);
 			}
 		},
-		COLOR_AS_RGB {
+		COLOR_AS_R_G_B {
 			@Override
 			public void execute(final SmartLedDeviceSimulator device, final Map<String, Object> parameters) {
 				@SuppressWarnings("unchecked")
