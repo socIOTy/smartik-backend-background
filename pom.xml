@@ -96,7 +96,8 @@
 				<configuration>
 					<appName>backend-background</appName>
 					<processTypes>
-						<worker>java -jar target/backend-background.jar</worker>
+						<web>java $JAVA_OPTS -jar target/backend-background.jar</web>
+						<worker>java $JAVA_OPTS -jar target/backend-background.jar</worker>
 					</processTypes>
 				</configuration>
 			</plugin>
