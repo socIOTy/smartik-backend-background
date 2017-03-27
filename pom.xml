@@ -95,9 +95,6 @@
 				<version>1.1.4</version>
 				<configuration>
 					<appName>backend-background</appName>
-					<processTypes>
-						<worker>java $JAVA_OPTS -jar target/backend-background.jar</worker>
-					</processTypes>
 				</configuration>
 			</plugin>
 		</plugins>

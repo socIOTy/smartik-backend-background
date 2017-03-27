@@ -4,6 +4,8 @@ import static java.lang.String.format;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -57,6 +59,8 @@ public class ActionListener<D extends DeviceSimulator<A>, A extends DeviceSimula
 	private static final String broker = "ssl://api.artik.cloud:8883";
 	private static final String actionTopicPattern = "/v1.1/actions/%s";
 	private static final String messageTopicPattern = "/v1.1/messages/%s";
+	
+	private static final Logger logger = Logger.getLogger(ActionListener.class.getName());
 
 	private final String deviceId;
 	private final String deviceToken;
@@ -109,6 +113,8 @@ public class ActionListener<D extends DeviceSimulator<A>, A extends DeviceSimula
 			System.out.println("cause " + me.getCause());
 			System.out.println("excep " + me);
 			me.printStackTrace();
+		} catch (final Exception e) {
+			logger.log(Level.INFO, "Exception: " + e.getMessage(), e);
 		}
 	}
 
