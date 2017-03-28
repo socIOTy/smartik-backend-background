@@ -19,11 +19,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.socioty.smartik.backend.model.Account;
-import com.socioty.smartik.backend.model.DeviceMap;
 import com.socioty.smartik.backend.model.Floor;
 import com.socioty.smartik.backend.model.Room;
 import com.socioty.smartik.backend.repositories.AccountRepository;
