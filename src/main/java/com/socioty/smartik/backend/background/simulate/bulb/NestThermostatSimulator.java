@@ -65,6 +65,14 @@ public class NestThermostatSimulator implements DeviceSimulator<Action> {
 				final double temperature = (double) parameters.get("temp");
 				device.setTemperature(temperature);
 			}
+		},
+		TEMPERATURE_IN_FAHRENHEIT {
+			@Override
+			public void execute(final NestThermostatSimulator device, final Map<String, Object> parameters) {
+				final double temperatureInFahrenheit = (double) parameters.get("temp");
+				final double temperatureInCelsius = (temperatureInFahrenheit - 32) / 1.8d;
+				device.setTemperature(temperatureInCelsius);
+			}
 		};
 
 		public static Action parseAction(final String actionString) {
