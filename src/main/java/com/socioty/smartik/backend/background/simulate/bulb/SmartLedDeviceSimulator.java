@@ -104,11 +104,13 @@ public class SmartLedDeviceSimulator implements DeviceSimulator<Action> {
 	private Color color;
 
 	public SmartLedDeviceSimulator(final Map<String,Object> initialState) {
-		final Gson gson = new Gson();
-		final MessagePayload payload = gson.fromJson(gson.toJson(initialState), MessagePayload.class);
-		this.state = payload.state;
-		this.intensity = payload.intensity;
-		this.color = payload.colorRGB.toColor();
+		if (initialState == null) {
+			final Gson gson = new Gson();
+			final MessagePayload payload = gson.fromJson(gson.toJson(initialState), MessagePayload.class);
+			this.state = payload.state;
+			this.intensity = payload.intensity;
+			this.color = payload.colorRGB.toColor();	
+		}
 	}
 
 	public SmartLedDeviceSimulator(final boolean state, final int intensity, final Color color) {

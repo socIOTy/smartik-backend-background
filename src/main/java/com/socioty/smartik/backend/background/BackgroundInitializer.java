@@ -19,8 +19,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.socioty.smartik.backend.model.Account;
+import com.socioty.smartik.backend.model.DeviceMap;
 import com.socioty.smartik.backend.model.Floor;
 import com.socioty.smartik.backend.model.Room;
 import com.socioty.smartik.backend.repositories.AccountRepository;
@@ -56,6 +59,7 @@ public class BackgroundInitializer implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
+//		createTestAccounts();
 		final Iterable<Account> accounts = repository.findAll();
 		setUpDeviceSimulators(accounts);
 	}
@@ -119,4 +123,13 @@ public class BackgroundInitializer implements CommandLineRunner {
 
 	}
 
+	
+//	private void createTestAccounts() {
+//		repository.deleteAll();
+//		repository.save(new Account("willian.campos@gmail.com",
+//				new DeviceMap(Lists.newArrayList(
+//						new Floor(Sets.newHashSet(
+//								new Room("Living room", Sets.newHashSet("aa251f8f408a4b09ace604553cfc9f2d", "c2e31b65ac6d4160bd9db7482765b5dc")))),
+//						new Floor(Sets.newHashSet(new Room("Bedroom", Sets.newHashSet())))))));
+//	}
 }
