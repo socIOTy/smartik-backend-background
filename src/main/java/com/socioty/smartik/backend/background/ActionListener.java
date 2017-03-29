@@ -87,6 +87,7 @@ public class ActionListener<D extends DeviceSimulator<A>, A extends DeviceSimula
 			final MqttConnectOptions connOpts = new MqttConnectOptions();
 			connOpts.setCleanSession(true);
 			connOpts.setConnectionTimeout(0);
+			connOpts.setKeepAliveInterval(0);
 			connOpts.setAutomaticReconnect(true);
 			connOpts.setUserName(deviceId);
 			connOpts.setPassword(deviceToken.toCharArray());
