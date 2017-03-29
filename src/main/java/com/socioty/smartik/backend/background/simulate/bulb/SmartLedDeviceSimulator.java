@@ -101,7 +101,7 @@ public class SmartLedDeviceSimulator implements DeviceSimulator<Action> {
 
 	private boolean state;
 	private int intensity;
-	private Color color;
+	private Color color = Color.WHITE;
 
 	public SmartLedDeviceSimulator(final Map<String,Object> initialState) {
 		if (initialState != null) {
