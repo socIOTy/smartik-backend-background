@@ -97,14 +97,18 @@ public class ActionListener<D extends DeviceSimulator<A>, A extends DeviceSimula
 			sampleClient.subscribe(actionTopic, new IMqttMessageListener() {
 				@Override
 				public void messageArrived(final String topic, final MqttMessage message) throws Exception {
-					final ActionPayload payload = parsePayload(message);
-					for (final Action action : payload.actions) {
-						device.getAction(action.name).execute(device, action.parameters);
-					}
+					try {
+						final ActionPayload payload = parsePayload(message);
+						for (final Action action : payload.actions) {
+							device.getAction(action.name).execute(device, action.parameters);
+						}
 
-					// publish message with device current state
-					final MqttMessage messageToSend = parseMessage();
-					sampleClient.publish(messageTopic, messageToSend);
+						// publish message with device current state
+						final MqttMessage messageToSend = parseMessage();
+						sampleClient.publish(messageTopic, messageToSend);	
+					} catch (final Exception e) {
+						e.printStackTrace();
+					}
 				}
 			});
 		} catch (MqttException me) {
