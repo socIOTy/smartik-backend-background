@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.google.common.collect.Iterables;
@@ -37,10 +38,11 @@ import cloud.artik.model.NormalizedMessagesEnvelope;
 
 @EnableAutoConfiguration
 @EnableMongoRepositories(basePackages = { "com.socioty.smartik.backend.repositories" })
+@ComponentScan(basePackages = { "com.socioty.smartik.backend.background.configuration", "com.socioty.smartik.backend.background.rabbit.listener"})
 public class BackgroundInitializer implements CommandLineRunner {
 
 	public static class GenerateTokenPayload {
-		private String access_token;
+		public String access_token;
 		@SuppressWarnings("unused")
 		private String token_type;
 		@SuppressWarnings("unused")
@@ -70,10 +72,12 @@ public class BackgroundInitializer implements CommandLineRunner {
 		final MessagesApi messagesApi = new MessagesApi(apiClient);
 
 		for (final Account account : accounts) {
+			System.out.println(account.getEmail());
 			for (final Floor floor : account.getDeviceMap().getFloors()) {
 				for (final Room room : floor.getRooms()) {
 					for (final String deviceId : room.getDeviceIds()) {
 						try {
+							System.out.println(deviceId);
 							final DeviceTokenEnvelope deviceTokenEnvelope = devicesApi.updateDeviceToken(deviceId);
 							final String deviceToken = deviceTokenEnvelope.getData().getAccessToken();
 							final String deviceTypeId = devicesApi.getDevice(deviceId).getData().getDtid();
